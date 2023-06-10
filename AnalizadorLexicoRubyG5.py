@@ -4,7 +4,13 @@ reserved = {
     'if': 'IF',
     'else':'Else',
     'print': 'PRINT',
-    'end': 'END'
+    'end': 'END',
+
+    'def':'DEF',
+    'break':'BREAK',
+    'class':'CLASS',
+    'while':'WHILE',
+    'for':'FOR'
 }
 
 
@@ -14,6 +20,13 @@ tokens = (
     'STRING',
     'AND',
     'GREATEROREQUALS', 
+
+    'ASSIGNMENT',
+    'ASSIGNINCREMENT',
+    'ASSIGNDECREMENT',
+    'LPAREN',
+    'RPAREN',
+    't_NUMBER'
 ) + tuple(reserved.values())
 
 t_GREATERTHAN = r'>'
@@ -21,6 +34,13 @@ t_EQUALS = r'=='
 t_GREATEROREQUALS = r'>='
 t_STRING = r'"[^".]*"'
 t_AND = r'&&'
+
+t_ASSIGNMENT = r'='
+t_ASSIGNINCREMENT = r'\+='
+t_ASSIGNDECREMENT = r'-='
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_NUMBER = r'\d+(\.\d)?'
 
 
 
