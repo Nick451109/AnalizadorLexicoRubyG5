@@ -26,7 +26,7 @@ tokens = (
     'ASSIGNDECREMENT',
     'LPAREN',
     'RPAREN',
-    't_NUMBER'
+    'NUMBER',
 ) + tuple(reserved.values())
 
 t_GREATERTHAN = r'>'
