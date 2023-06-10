@@ -13,7 +13,8 @@ reserved = {
   'while':'WHILE',
   'for':'FOR',
   'true':'TRUE',
-  'false':'FALSE'
+  'false':'FALSE',
+  'in':'INARRAY',
 }
 
 
@@ -80,9 +81,13 @@ else
     print "No puede manejar"
 end
 '''
+algortimoNick = '''  sum = 0
+  for num in numbers
+    sum += num
+  end
+'''
 
-
-lexer.input(algoritmoAndres)
+lexer.input(algortimoNick)
 # Tokenizador
 while True:
   tok = lexer.token()
