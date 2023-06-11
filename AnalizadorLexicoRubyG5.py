@@ -15,6 +15,9 @@ reserved = {
   'true':'TRUE',
   'false':'FALSE',
   'in':'INARRAY',
+  #Yoser
+  'elsif': 'ELSIF',
+  'def':'DEF',
 }
 
 
@@ -33,6 +36,9 @@ tokens = (
   'LPAREN',
   'RPAREN',
   'NUMBER',
+  #Yoser
+  'DIVISION'
+  'SUM'
 ) + tuple(reserved.values())
 
 #Andres
@@ -49,6 +55,10 @@ t_ASSIGNDECREMENT = r'-='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_NUMBER = r'\d+(\.\d)?'
+#Yoser
+t_DIVISION = r'\/'
+t_SUM = r'\+'
+
 
 t_ignore = ' \t'
 
@@ -71,6 +81,7 @@ def t_error(t):
 
 
 lexer = lex.lex()
+
 #Andres
 algoritmoAndres = '''edad = 18
 licencia = true
@@ -86,8 +97,20 @@ algortimoNick = '''  sum = 0
     sum += num
   end
 '''
+algoritmoYoser = '''
+def adivinarResultado(lado1, lado2, lado3, num )
+  resultado = lado1 + lado2 / lado3
+    if num == resutado
+      print "adivino"
+    elsif num < resultado
+      print "numero muy pequeño"
+    elsif num > resultado
+      print "numero muy grande"
+    end
+  end
 
-lexer.input(algortimoNick)
+'''
+lexer.input(algoritmoYoser)
 # Tokenizador
 while True:
   tok = lexer.token()
