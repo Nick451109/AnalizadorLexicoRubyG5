@@ -14,7 +14,7 @@ reserved = {
   'true':'TRUE',
   'false':'FALSE',
   'in':'INARRAY',
-  #Yoser
+  #Joseph
   'elsif': 'ELSIF',
   'def':'DEF',
   'case':'CASE',
@@ -37,7 +37,7 @@ tokens = (
   'LPAREN',
   'RPAREN',
   'NUMBER',
-  #Yoser
+  #Joseph
   'DIVISION',
   'SUM',
   'COMA',
@@ -61,7 +61,7 @@ t_ASSIGNDECREMENT = r'-='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_NUMBER = r'\d+(\.\d)?'
-#Yoser
+#Joseph
 t_DIVISION = r'\/'
 t_SUM = r'\+'
 t_COMA = r'\,'
