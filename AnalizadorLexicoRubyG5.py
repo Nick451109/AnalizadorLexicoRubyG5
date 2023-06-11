@@ -7,7 +7,6 @@ reserved = {
   'print':'PRINT',
   'end':'END',
   #Nick
-  'def':'DEF',
   'break':'BREAK',
   'class':'CLASS',
   'while':'WHILE',
@@ -18,6 +17,8 @@ reserved = {
   #Yoser
   'elsif': 'ELSIF',
   'def':'DEF',
+  'case':'CASE',
+  'then':'THEN'
 }
 
 
@@ -37,8 +38,13 @@ tokens = (
   'RPAREN',
   'NUMBER',
   #Yoser
-  'DIVISION'
-  'SUM'
+  'DIVISION',
+  'SUM',
+  'COMA',
+  'LESSTHAN',
+  'POWER',
+  'MULTIPLICATION',
+  'MINUS'
 ) + tuple(reserved.values())
 
 #Andres
@@ -58,13 +64,18 @@ t_NUMBER = r'\d+(\.\d)?'
 #Yoser
 t_DIVISION = r'\/'
 t_SUM = r'\+'
+t_COMA = r'\,'
+t_LESSTHAN = r'\<'
+t_POWER = r'\*\*'
+t_MULTIPLICATION = r'\*'
+t_MINUS = r'\-'
 
 
 t_ignore = ' \t'
 
 #Andres
 def t_VARIABLE(t):
-  r'(\$|@)?[a-zA-Z]+'
+  r'(\$|@)?[a-zA-Z-0-9_]+'
   t.type = reserved.get(t.value, 'VARIABLE')
   return t
 
@@ -98,8 +109,8 @@ algortimoNick = '''  sum = 0
   end
 '''
 algoritmoYoser = '''
-def adivinarResultado(lado1, lado2, lado3, num )
-  resultado = lado1 + lado2 / lado3
+def adivinarResultado(lado_1, lado2, lado3, num )
+  resultado = lado1**lado2 / lado3
     if num == resutado
       print "adivino"
     elsif num < resultado
