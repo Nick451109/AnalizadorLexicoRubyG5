@@ -89,7 +89,7 @@ t_ignore = ' \t'
 
 #Andres
 def t_VARIABLE(t):
-  r'(\$|@)?[a-zA-Z-0-9_]+'
+  r'(\$|@)?[a-zA-Z_]+[0-9-a-zA-Z]+'
   t.type = reserved.get(t.value, 'VARIABLE')
   return t
 
@@ -143,7 +143,7 @@ def adivinarResultado(lado_1, lado2, lado3)
   print "trate de adivinar el resultado \n"
   print "Usted tiene #{intentos} intentos\n"
   
-  while intentos > 0
+  while intentos > 332.4
     
      print "Ingrese un numero: "
      num = gets.chomp.to_f
