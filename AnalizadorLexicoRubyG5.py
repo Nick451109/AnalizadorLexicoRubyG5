@@ -36,7 +36,7 @@ tokens = (
   'ASSIGNDECREMENT',
   'LPAREN',
   'RPAREN',
-  'NUMBER',
+  'INTEGER',
   #Joseph
   'DIVISION',
   'PLUS',
@@ -44,7 +44,8 @@ tokens = (
   'LESSTHAN',
   'POWER',
   'MULTIPLICATION',
-  'MINUS'
+  'MINUS',
+  'FLOAT'
 ) + tuple(reserved.values())
 
 #Andres
@@ -60,7 +61,7 @@ t_ASSIGNINCREMENT = r'\+='
 t_ASSIGNDECREMENT = r'-='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_NUMBER = r'\d+(\.\d)?'
+t_INTEGER = r'\d+'
 #Joseph
 t_DIVISION = r'\/'
 t_PLUS = r'\+'
@@ -69,13 +70,13 @@ t_LESSTHAN = r'\<'
 t_POWER = r'\*\*'
 t_MULTIPLICATION = r'\*'
 t_MINUS = r'\-'
-
+t_FLOAT =r'([0-9]*\.[0-9]+)'
 
 t_ignore = ' \t'
 
 #Andres
 def t_VARIABLE(t):
-  r'(\$|@)?([0-9]*\.[0-9]+|[a-zA-Z-0-9_]+)'
+  r'(\$|@)?[a-zA-Z-0-9_]+'
   t.type = reserved.get(t.value, 'VARIABLE')
   return t
 
@@ -111,6 +112,7 @@ algortimoNick = '''  sum = 0
 algoritmoYoser = '''
 def adivinarResultado(lado_1, lado2, lado3, num )
   resultado = lado1**lado2 / lado3
+  num = 2.3
     if num == resutado
       print "adivino"
     elsif num < resultado
