@@ -149,7 +149,7 @@ def adivinarResultado(lado_1, lado2, lado3)
      num = gets.chomp.to_f
     
     if num == resultado
-      print 'adivino'
+      print "adivino"
       intentos == 0
     elsif num < resultado
       print "numero es mayor"
