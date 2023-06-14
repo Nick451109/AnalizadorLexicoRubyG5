@@ -130,17 +130,31 @@ else
 end
 '''
 algoritmoYoser = '''
-def adivinarResultado(lado_1, lado2, lado3, num )
-  resultado = lado1**lado2 / lado3
-  num = 2.3
-    if num == resutado
-      print "adivino"
+def adivinarResultado(lado_1, lado2, lado3)
+  resultado = lado_1**lado2 / lado3
+  intentos = 3
+  print "trate de adivinar el resultado \n"
+  print "Usted tiene #{intentos} intentos\n"
+  
+  while intentos > 0
+    
+     print 'Ingrese un numero: '
+     num = gets.chomp.to_f
+    
+    if num == resultado
+      print 'adivino'
+      intentos == 0
     elsif num < resultado
-      print "numero muy pequeno"
+      print 'numero es mayor'
     elsif num > resultado
-      print "numero muy grande"
+      print 'numero es menor'
     end
-    puts fibonacci.join(", ")
+    
+    intentos -= 1
+    puts "Intentos restantes: #{intentos}\n\n"
+  end
+  puts "Se acabaron los intentos. El resultado era #{resultado}."
+end
   end
 
 '''
