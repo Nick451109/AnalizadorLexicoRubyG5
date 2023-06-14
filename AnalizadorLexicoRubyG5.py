@@ -108,13 +108,20 @@ def t_error(t):
 lexer = lex.lex()
 
 #Andres
-algoritmoAndres = '''edad = 18.7
-licencia = true
-
-if(edad>=18 && licencia == true)
-    print "Puede manejar"
-else
-    print "No puede manejar"
+algoritmoAndres = '''def busquedaBinaria(arreglo, numero)
+    inicio = 0
+    fin = arreglo.length - 1
+    while inicio <= fin
+      mid = (inicio + fin) / 2
+      if arreglo[mid] == numero
+        return mid  
+      elsif arreglo[mid] > numero
+        fin = mid - 1  
+      else
+        inicio = mid + 1
+      end
+    end
+    return nil 
 end
 '''
 algoritmoNick = '''cantNumeros = 10
@@ -138,27 +145,27 @@ def adivinarResultado(lado_1, lado2, lado3)
   
   while intentos > 0
     
-     print 'Ingrese un numero: '
+     print "Ingrese un numero: "
      num = gets.chomp.to_f
     
     if num == resultado
       print 'adivino'
       intentos == 0
     elsif num < resultado
-      print 'numero es mayor'
+      print "numero es mayor"
     elsif num > resultado
-      print 'numero es menor'
+      print "numero es menor"
     end
     
     intentos -= 1
     puts "Intentos restantes: #{intentos}\n\n"
   end
-  puts "Se acabaron los intentos. El resultado era #{resultado}."
+  puts "Se acabaron los intentos, el resultado era #{resultado}"
 end
   end
 
 '''
-lexer.input(algoritmoNick)
+lexer.input(algoritmoAndres)
 # Tokenizador
 while True:
   tok = lexer.token()
