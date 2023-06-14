@@ -75,7 +75,7 @@ t_ignore = ' \t'
 
 #Andres
 def t_VARIABLE(t):
-  r'(\$|@)?[a-zA-Z-0-9_]+'
+  r'(\$|@)?([0-9]*\.[0-9]+|[a-zA-Z-0-9_]+)'
   t.type = reserved.get(t.value, 'VARIABLE')
   return t
 
@@ -94,7 +94,7 @@ def t_error(t):
 lexer = lex.lex()
 
 #Andres
-algoritmoAndres = '''edad = 18
+algoritmoAndres = '''edad = 18.7
 licencia = true
 
 if(edad>=18 && licencia == true)
