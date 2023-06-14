@@ -52,7 +52,10 @@ tokens = (
   'POWER',
   'MULTIPLICATION',
   'MINUS',
-  'FLOAT'
+  'FLOAT',
+  'DOT',
+  'OPENBRACKET',
+  'CLOSEDBRACKET',
 ) + tuple(reserved.values())
 
 #Andres
@@ -69,6 +72,9 @@ t_ASSIGNDECREMENT = r'-='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_INTEGER = r'\d+'
+t_DOT = r'\.'
+t_OPENBRACKET = r'\['
+t_CLOSEDBRACKET = r'\]'
 #Joseph
 t_DIVISION = r'\/'
 t_PLUS = r'\+'
@@ -111,10 +117,17 @@ else
     print "No puede manejar"
 end
 '''
-algortimoNick = '''  sum = 0
-  for num in numbers
-    sum += num
+algoritmoNick = '''cantNumeros = 10
+if cantNumeros <= 0
+  puts "Ingrese un número válido."
+else
+  fibonacci = [0,1]
+  while fibonacci.length < cantNumeros
+    next_number = fibonacci[-1] + fibonacci[-2]
+    fibonacci << next_number
   end
+  puts fibonacci.join(", ")
+end
 '''
 algoritmoYoser = '''
 def adivinarResultado(lado_1, lado2, lado3, num )
@@ -123,14 +136,15 @@ def adivinarResultado(lado_1, lado2, lado3, num )
     if num == resutado
       print "adivino"
     elsif num < resultado
-      print "numero muy pequeño"
+      print "numero muy pequeno"
     elsif num > resultado
       print "numero muy grande"
     end
+    puts fibonacci.join(", ")
   end
 
 '''
-lexer.input(algoritmoYoser)
+lexer.input(algoritmoNick)
 # Tokenizador
 while True:
   tok = lexer.token()
