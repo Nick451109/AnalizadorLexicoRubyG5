@@ -119,7 +119,7 @@ end
 '''
 algoritmoNick = '''cantNumeros = 10
 if cantNumeros <= 0
-  puts "Ingrese un número válido."
+  puts "Ingrese un numero valido"
 else
   fibonacci = [0,1]
   while fibonacci.length < cantNumeros
