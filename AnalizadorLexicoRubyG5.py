@@ -39,8 +39,8 @@ tokens = (
   'NUMBER',
   #Joseph
   'DIVISION',
-  'SUM',
-  'COMA',
+  'PLUS',
+  'COMMA',
   'LESSTHAN',
   'POWER',
   'MULTIPLICATION',
@@ -63,8 +63,8 @@ t_RPAREN = r'\)'
 t_NUMBER = r'\d+(\.\d)?'
 #Joseph
 t_DIVISION = r'\/'
-t_SUM = r'\+'
-t_COMA = r'\,'
+t_PLUS = r'\+'
+t_COMMA = r'\,'
 t_LESSTHAN = r'\<'
 t_POWER = r'\*\*'
 t_MULTIPLICATION = r'\*'
