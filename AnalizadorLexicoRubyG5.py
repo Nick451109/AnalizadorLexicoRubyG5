@@ -62,7 +62,7 @@ tokens = (
 t_GREATERTHAN = r'>'
 t_EQUALS = r'=='
 t_GREATEROREQUALS = r'>='
-t_STRING =r'"[^".]*"'
+t_STRING =r'"[^"].*'
 t_AND = r'&&'
 
 #Nick
@@ -160,12 +160,12 @@ def adivinarResultado(lado_1, lado2, lado3)
     intentos -= 1
     puts "Intentos restantes: #{intentos}\n\n"
   end
-  puts "Se acabaron los intentos, el resultado era #{resultado}"
+  puts "Se acabaron los intentos. El resultado era #{resultado}."
 end
   end
 
 '''
-lexer.input(algoritmoAndres)
+lexer.input(algoritmoYoser)
 # Tokenizador
 while True:
   tok = lexer.token()
