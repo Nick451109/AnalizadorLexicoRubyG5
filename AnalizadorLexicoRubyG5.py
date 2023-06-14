@@ -62,7 +62,7 @@ tokens = (
 t_GREATERTHAN = r'>'
 t_EQUALS = r'=='
 t_GREATEROREQUALS = r'>='
-t_STRING =r'"[^"].*'
+t_STRING =r'"[^"]*"'
 t_AND = r'&&'
 
 #Nick
