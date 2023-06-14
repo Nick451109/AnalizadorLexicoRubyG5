@@ -6,6 +6,7 @@ reserved = {
   'else':'ElSE',
   'print':'PRINT',
   'end':'END',
+
   #Nick
   'break':'BREAK',
   'class':'CLASS',
@@ -14,11 +15,17 @@ reserved = {
   'true':'TRUE',
   'false':'FALSE',
   'in':'INARRAY',
+
   #Joseph
   'elsif': 'ELSIF',
   'def':'DEF',
   'case':'CASE',
-  'then':'THEN'
+  'then':'THEN',
+  'puts':'PUTS',
+  'gets':'GETS',
+  'chomp':'CHOMP',
+  'to_i':'TO_I',
+  'to_f':'TO_F'
 }
 
 
