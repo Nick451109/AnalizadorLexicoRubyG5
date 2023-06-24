@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEvariable : ID ASSIGNMENT varibles\n  varibles : FLOAT \n           | INTEGER\n           | ID\n  '
+_lr_signature = 'AND ASSIGNDECREMENT ASSIGNINCREMENT ASSIGNMENT BREAK BREAK BREAK CASE CASE CASE CHOMP CHOMP CHOMP CLASS CLASS CLASS CLOSEDBRACKET COMMA DEF DEF DEF DIVISION DOT ELSE ELSE ELSE ELSIF ELSIF ELSIF END END END EQUALS FALSE FALSE FALSE FLOAT FOR FOR FOR GETS GETS GETS GREATEROREQUALS GREATERTHAN ID IF IF IF IN IN IN INTEGER LESSTHAN LPAREN MINUS MULTIPLICATION OPENBRACKET PLUS POWER PRINT PRINT PRINT PUTS PUTS PUTS RPAREN STRING THEN THEN THEN TO_F TO_F TO_F TO_I TO_I TO_I TRUE TRUE TRUE WHILE WHILE WHILEinstruction : ID ASSIGNMENT dataType\n  instruction : DEF ID LPAREN parameters RPAREN END\n                  | DEF ID LPAREN RPAREN END\n  \n    parameters : ID \n               | ID COMMA ID \n    \n    instructionConditional : IF LPAREN condition RPAREN\n  \n    condition : TRUE\n               | FALSE \n  \n  dataType : FLOAT\n           | INTEGER\n           | TRUE\n           | FALSE\n  '
     
-_lr_action_items = {'ID':([0,3,],[2,4,]),'$end':([1,4,5,6,7,],[0,-4,-1,-2,-3,]),'ASSIGNMENT':([2,],[3,]),'FLOAT':([3,],[6,]),'INTEGER':([3,],[7,]),}
+_lr_action_items = {'ID':([0,3,11,15,],[2,5,12,18,]),'DEF':([0,],[3,]),'$end':([1,6,7,8,9,10,17,19,],[0,-1,-9,-10,-11,-12,-3,-2,]),'ASSIGNMENT':([2,],[4,]),'FLOAT':([4,],[7,]),'INTEGER':([4,],[8,]),'TRUE':([4,],[9,]),'FALSE':([4,],[10,]),'LPAREN':([5,],[11,]),'RPAREN':([11,12,13,18,],[14,-4,16,-5,]),'COMMA':([12,],[15,]),'END':([14,16,],[17,19,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'variable':([0,],[1,]),'varibles':([3,],[5,]),}
+_lr_goto_items = {'instruction':([0,],[1,]),'dataType':([4,],[6,]),'parameters':([11,],[13,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,9 +26,17 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> variable","S'",1,None,None,None),
-  ('variable -> ID ASSIGNMENT varibles','variable',3,'p_varibles','main.py',5),
-  ('varibles -> FLOAT','varibles',1,'p_variablesP','main.py',9),
-  ('varibles -> INTEGER','varibles',1,'p_variablesP','main.py',10),
-  ('varibles -> ID','varibles',1,'p_variablesP','main.py',11),
+  ("S' -> instruction","S'",1,None,None,None),
+  ('instruction -> ID ASSIGNMENT dataType','instruction',3,'p_instuction','main.py',5),
+  ('instruction -> DEF ID LPAREN parameters RPAREN END','instruction',6,'p_instructionFunction','main.py',9),
+  ('instruction -> DEF ID LPAREN RPAREN END','instruction',5,'p_instructionFunction','main.py',10),
+  ('parameters -> ID','parameters',1,'p_parameters','main.py',15),
+  ('parameters -> ID COMMA ID','parameters',3,'p_parameters','main.py',16),
+  ('instructionConditional -> IF LPAREN condition RPAREN','instructionConditional',4,'p_instructionConditional','main.py',21),
+  ('condition -> TRUE','condition',1,'p_condition','main.py',27),
+  ('condition -> FALSE','condition',1,'p_condition','main.py',28),
+  ('dataType -> FLOAT','dataType',1,'p_dataType','main.py',33),
+  ('dataType -> INTEGER','dataType',1,'p_dataType','main.py',34),
+  ('dataType -> TRUE','dataType',1,'p_dataType','main.py',35),
+  ('dataType -> FALSE','dataType',1,'p_dataType','main.py',36),
 ]

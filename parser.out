@@ -10,23 +10,17 @@ Unused terminals:
     CHOMP
     CLASS
     CLOSEDBRACKET
-    COMMA
-    DEF
     DIVISION
     DOT
     ELSE
     ELSIF
-    END
     EQUALS
-    FALSE
     FOR
     GETS
     GREATEROREQUALS
     GREATERTHAN
-    IF
     IN
     LESSTHAN
-    LPAREN
     MINUS
     MULTIPLICATION
     OPENBRACKET
@@ -34,21 +28,27 @@ Unused terminals:
     POWER
     PRINT
     PUTS
-    RPAREN
     STRING
     THEN
     TO_F
     TO_I
-    TRUE
     WHILE
 
 Grammar
 
-Rule 0     S' -> variable
-Rule 1     variable -> ID ASSIGNMENT varibles
-Rule 2     varibles -> FLOAT
-Rule 3     varibles -> INTEGER
-Rule 4     varibles -> ID
+Rule 0     S' -> instruction
+Rule 1     instruction -> ID ASSIGNMENT dataType
+Rule 2     instruction -> DEF ID LPAREN parameters RPAREN END
+Rule 3     instruction -> DEF ID LPAREN RPAREN END
+Rule 4     parameters -> ID
+Rule 5     parameters -> ID COMMA ID
+Rule 6     instructionConditional -> IF LPAREN condition RPAREN
+Rule 7     condition -> TRUE
+Rule 8     condition -> FALSE
+Rule 9     dataType -> FLOAT
+Rule 10    dataType -> INTEGER
+Rule 11    dataType -> TRUE
+Rule 12    dataType -> FALSE
 
 Terminals, with rules where they appear
 
@@ -61,26 +61,26 @@ CASE                 :
 CHOMP                : 
 CLASS                : 
 CLOSEDBRACKET        : 
-COMMA                : 
-DEF                  : 
+COMMA                : 5
+DEF                  : 2 3
 DIVISION             : 
 DOT                  : 
 ELSE                 : 
 ELSIF                : 
-END                  : 
+END                  : 2 3
 EQUALS               : 
-FALSE                : 
-FLOAT                : 2
+FALSE                : 8 12
+FLOAT                : 9
 FOR                  : 
 GETS                 : 
 GREATEROREQUALS      : 
 GREATERTHAN          : 
-ID                   : 1 4
-IF                   : 
+ID                   : 1 2 3 4 5 5
+IF                   : 6
 IN                   : 
-INTEGER              : 3
+INTEGER              : 10
 LESSTHAN             : 
-LPAREN               : 
+LPAREN               : 2 3 6
 MINUS                : 
 MULTIPLICATION       : 
 OPENBRACKET          : 
@@ -88,81 +88,182 @@ PLUS                 :
 POWER                : 
 PRINT                : 
 PUTS                 : 
-RPAREN               : 
+RPAREN               : 2 3 6
 STRING               : 
 THEN                 : 
 TO_F                 : 
 TO_I                 : 
-TRUE                 : 
+TRUE                 : 7 11
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-variable             : 0
-varibles             : 1
+condition            : 6
+dataType             : 1
+instruction          : 0
+instructionConditional : 
+parameters           : 2
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . variable
-    (1) variable -> . ID ASSIGNMENT varibles
+    (0) S' -> . instruction
+    (1) instruction -> . ID ASSIGNMENT dataType
+    (2) instruction -> . DEF ID LPAREN parameters RPAREN END
+    (3) instruction -> . DEF ID LPAREN RPAREN END
 
     ID              shift and go to state 2
+    DEF             shift and go to state 3
 
-    variable                       shift and go to state 1
+    instruction                    shift and go to state 1
 
 state 1
 
-    (0) S' -> variable .
+    (0) S' -> instruction .
 
 
 
 state 2
 
-    (1) variable -> ID . ASSIGNMENT varibles
+    (1) instruction -> ID . ASSIGNMENT dataType
 
-    ASSIGNMENT      shift and go to state 3
+    ASSIGNMENT      shift and go to state 4
 
 
 state 3
 
-    (1) variable -> ID ASSIGNMENT . varibles
-    (2) varibles -> . FLOAT
-    (3) varibles -> . INTEGER
-    (4) varibles -> . ID
+    (2) instruction -> DEF . ID LPAREN parameters RPAREN END
+    (3) instruction -> DEF . ID LPAREN RPAREN END
 
-    FLOAT           shift and go to state 6
-    INTEGER         shift and go to state 7
-    ID              shift and go to state 4
+    ID              shift and go to state 5
 
-    varibles                       shift and go to state 5
 
 state 4
 
-    (4) varibles -> ID .
+    (1) instruction -> ID ASSIGNMENT . dataType
+    (9) dataType -> . FLOAT
+    (10) dataType -> . INTEGER
+    (11) dataType -> . TRUE
+    (12) dataType -> . FALSE
 
-    $end            reduce using rule 4 (varibles -> ID .)
+    FLOAT           shift and go to state 7
+    INTEGER         shift and go to state 8
+    TRUE            shift and go to state 9
+    FALSE           shift and go to state 10
 
+    dataType                       shift and go to state 6
 
 state 5
 
-    (1) variable -> ID ASSIGNMENT varibles .
+    (2) instruction -> DEF ID . LPAREN parameters RPAREN END
+    (3) instruction -> DEF ID . LPAREN RPAREN END
 
-    $end            reduce using rule 1 (variable -> ID ASSIGNMENT varibles .)
+    LPAREN          shift and go to state 11
 
 
 state 6
 
-    (2) varibles -> FLOAT .
+    (1) instruction -> ID ASSIGNMENT dataType .
 
-    $end            reduce using rule 2 (varibles -> FLOAT .)
+    $end            reduce using rule 1 (instruction -> ID ASSIGNMENT dataType .)
 
 
 state 7
 
-    (3) varibles -> INTEGER .
+    (9) dataType -> FLOAT .
 
-    $end            reduce using rule 3 (varibles -> INTEGER .)
+    $end            reduce using rule 9 (dataType -> FLOAT .)
+
+
+state 8
+
+    (10) dataType -> INTEGER .
+
+    $end            reduce using rule 10 (dataType -> INTEGER .)
+
+
+state 9
+
+    (11) dataType -> TRUE .
+
+    $end            reduce using rule 11 (dataType -> TRUE .)
+
+
+state 10
+
+    (12) dataType -> FALSE .
+
+    $end            reduce using rule 12 (dataType -> FALSE .)
+
+
+state 11
+
+    (2) instruction -> DEF ID LPAREN . parameters RPAREN END
+    (3) instruction -> DEF ID LPAREN . RPAREN END
+    (4) parameters -> . ID
+    (5) parameters -> . ID COMMA ID
+
+    RPAREN          shift and go to state 14
+    ID              shift and go to state 12
+
+    parameters                     shift and go to state 13
+
+state 12
+
+    (4) parameters -> ID .
+    (5) parameters -> ID . COMMA ID
+
+    RPAREN          reduce using rule 4 (parameters -> ID .)
+    COMMA           shift and go to state 15
+
+
+state 13
+
+    (2) instruction -> DEF ID LPAREN parameters . RPAREN END
+
+    RPAREN          shift and go to state 16
+
+
+state 14
+
+    (3) instruction -> DEF ID LPAREN RPAREN . END
+
+    END             shift and go to state 17
+
+
+state 15
+
+    (5) parameters -> ID COMMA . ID
+
+    ID              shift and go to state 18
+
+
+state 16
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN . END
+
+    END             shift and go to state 19
+
+
+state 17
+
+    (3) instruction -> DEF ID LPAREN RPAREN END .
+
+    $end            reduce using rule 3 (instruction -> DEF ID LPAREN RPAREN END .)
+
+
+state 18
+
+    (5) parameters -> ID COMMA ID .
+
+    RPAREN          reduce using rule 5 (parameters -> ID COMMA ID .)
+
+
+state 19
+
+    (2) instruction -> DEF ID LPAREN parameters RPAREN END .
+
+    $end            reduce using rule 2 (instruction -> DEF ID LPAREN parameters RPAREN END .)
 

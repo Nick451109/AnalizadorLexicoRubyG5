@@ -1,14 +1,45 @@
 from lexico import tokens
 import ply.yacc as yacc
 
-def p_varibles(p):
-  'variable : ID ASSIGNMENT varibles'
+#Intructions
 
-def p_variablesP(p):
+def p_instuction(p):
+  'instruction : ID ASSIGNMENT dataType'
+
+def p_instructionFunction(p):
   '''
-  varibles : FLOAT 
+  instruction : DEF ID LPAREN parameters RPAREN END
+                  | DEF ID LPAREN RPAREN END
+  '''
+
+#Parameters
+def p_parameters(p):
+  '''
+    parameters : ID 
+               | ID COMMA ID 
+  '''
+
+#StructureData
+
+def p_instructionConditional(p):
+  '''  
+    instructionConditional : IF LPAREN condition RPAREN
+  '''
+
+#DataTypes
+
+def p_condition(p):
+  '''
+    condition : TRUE
+               | FALSE 
+  '''
+
+def p_dataType(p):
+  '''
+  dataType : FLOAT
            | INTEGER
-           | ID
+           | TRUE
+           | FALSE
   '''
 
 def p_error(p):
