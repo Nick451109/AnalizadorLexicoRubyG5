@@ -1,0 +1,168 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ASSIGNDECREMENT
+    ASSIGNINCREMENT
+    BREAK
+    CASE
+    CHOMP
+    CLASS
+    CLOSEDBRACKET
+    COMMA
+    DEF
+    DIVISION
+    DOT
+    ELSE
+    ELSIF
+    END
+    EQUALS
+    FALSE
+    FOR
+    GETS
+    GREATEROREQUALS
+    GREATERTHAN
+    IF
+    IN
+    LESSTHAN
+    LPAREN
+    MINUS
+    MULTIPLICATION
+    OPENBRACKET
+    PLUS
+    POWER
+    PRINT
+    PUTS
+    RPAREN
+    STRING
+    THEN
+    TO_F
+    TO_I
+    TRUE
+    WHILE
+
+Grammar
+
+Rule 0     S' -> variable
+Rule 1     variable -> ID ASSIGNMENT varibles
+Rule 2     varibles -> FLOAT
+Rule 3     varibles -> INTEGER
+Rule 4     varibles -> ID
+
+Terminals, with rules where they appear
+
+AND                  : 
+ASSIGNDECREMENT      : 
+ASSIGNINCREMENT      : 
+ASSIGNMENT           : 1
+BREAK                : 
+CASE                 : 
+CHOMP                : 
+CLASS                : 
+CLOSEDBRACKET        : 
+COMMA                : 
+DEF                  : 
+DIVISION             : 
+DOT                  : 
+ELSE                 : 
+ELSIF                : 
+END                  : 
+EQUALS               : 
+FALSE                : 
+FLOAT                : 2
+FOR                  : 
+GETS                 : 
+GREATEROREQUALS      : 
+GREATERTHAN          : 
+ID                   : 1 4
+IF                   : 
+IN                   : 
+INTEGER              : 3
+LESSTHAN             : 
+LPAREN               : 
+MINUS                : 
+MULTIPLICATION       : 
+OPENBRACKET          : 
+PLUS                 : 
+POWER                : 
+PRINT                : 
+PUTS                 : 
+RPAREN               : 
+STRING               : 
+THEN                 : 
+TO_F                 : 
+TO_I                 : 
+TRUE                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+variable             : 0
+varibles             : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . variable
+    (1) variable -> . ID ASSIGNMENT varibles
+
+    ID              shift and go to state 2
+
+    variable                       shift and go to state 1
+
+state 1
+
+    (0) S' -> variable .
+
+
+
+state 2
+
+    (1) variable -> ID . ASSIGNMENT varibles
+
+    ASSIGNMENT      shift and go to state 3
+
+
+state 3
+
+    (1) variable -> ID ASSIGNMENT . varibles
+    (2) varibles -> . FLOAT
+    (3) varibles -> . INTEGER
+    (4) varibles -> . ID
+
+    FLOAT           shift and go to state 6
+    INTEGER         shift and go to state 7
+    ID              shift and go to state 4
+
+    varibles                       shift and go to state 5
+
+state 4
+
+    (4) varibles -> ID .
+
+    $end            reduce using rule 4 (varibles -> ID .)
+
+
+state 5
+
+    (1) variable -> ID ASSIGNMENT varibles .
+
+    $end            reduce using rule 1 (variable -> ID ASSIGNMENT varibles .)
+
+
+state 6
+
+    (2) varibles -> FLOAT .
+
+    $end            reduce using rule 2 (varibles -> FLOAT .)
+
+
+state 7
+
+    (3) varibles -> INTEGER .
+
+    $end            reduce using rule 3 (varibles -> INTEGER .)
+

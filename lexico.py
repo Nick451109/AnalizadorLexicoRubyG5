@@ -1,32 +1,12 @@
 import ply.lex as lex
+import reservadas
 
-reserved = {
-  #Andres
-  'if':'IF',
-  'else':'ElSE',
-  'print':'PRINT',
-  'end':'END',
+#andres if  - end 
+#nick break - in 
+#joseph elsif - to_i
+reserved = reservadas.crear(
+  ['if','else','print','end','break','class','while','for','true','false','in','elsif','def','case','then','puts','gets','chomp','to_i','to_f'])
 
-  #Nick
-  'break':'BREAK',
-  'class':'CLASS',
-  'while':'WHILE',
-  'for':'FOR',
-  'true':'TRUE',
-  'false':'FALSE',
-  'in':'INARRAY',
-
-  #Joseph
-  'elsif': 'ELSIF',
-  'def':'DEF',
-  'case':'CASE',
-  'then':'THEN',
-  'puts':'PUTS',
-  'gets':'GETS',
-  'chomp':'CHOMP',
-  'to_i':'TO_I',
-  'to_f':'TO_F'
-}
 
 
 tokens = (
@@ -36,7 +16,7 @@ tokens = (
   'STRING',
   'AND',
   'GREATEROREQUALS',
-  'VARIABLE',
+  'ID',
   #Nick
   'ASSIGNMENT',
   'ASSIGNINCREMENT',
@@ -88,9 +68,9 @@ t_FLOAT =r'([0-9]*\.[0-9]+)'
 t_ignore = ' \t'
 
 #Andres
-def t_VARIABLE(t):
+def t_ID(t):
   r'(\$|@)?[a-zA-Z_]+[0-9-a-zA-Z]+'
-  t.type = reserved.get(t.value, 'VARIABLE')
+  t.type = reserved.get(t.value, 'ID')
   return t
 
 def t_newLine(t):
@@ -165,10 +145,3 @@ end
   end
 
 '''
-lexer.input(algoritmoYoser)
-# Tokenizador
-while True:
-  tok = lexer.token()
-  if not tok:
-    break
-  print(tok)
