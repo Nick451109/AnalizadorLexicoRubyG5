@@ -1,1 +1,0 @@
-# AnalizadorLexicoRubyG5
